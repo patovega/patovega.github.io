@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patricio Vega — AI / Computer Vision Engineer</title>
+<meta name="description" content="Patricio Vega — AI & Computer Vision Engineer. Master's in Artificial Intelligence. Drone Pilot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elev: #111111;
+    --bg-card: #141414;
+    --neon: #39ff14;
+    --neon-dim: #2bcf0f;
+    --neon-glow: rgba(57, 255, 20, 0.35);
+    --text: #e8e8e8;
+    --text-muted: #8a8a8a;
+    --border: #1f1f1f;
+    --border-bright: #2a2a2a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(57, 255, 20, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(57, 255, 20, 0.05) 0%, transparent 50%);
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 1.2rem 0;
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--neon);
+    letter-spacing: -0.5px;
+  }
+
+  .logo::before { content: '> '; opacity: 0.6; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover { color: var(--neon); }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--neon);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 0;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--neon);
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--neon);
+    border-radius: 2px;
+    background: rgba(57, 255, 20, 0.05);
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .hero-tag .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--neon);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s ease 0.1s backwards;
+  }
+
+  h1 .accent {
+    color: var(--neon);
+    text-shadow: 0 0 30px var(--neon-glow);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--text-muted);
+    font-weight: 400;
+    max-width: 650px;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    animation: fadeInUp 0.8s ease 0.3s backwards;
+  }
+
+  .hero-meta span strong {
+    color: var(--neon);
+    font-weight: 600;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 5rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--neon);
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .about-text .highlight {
+    color: var(--neon);
+    font-weight: 600;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .stack-item {
+    padding: 0.8rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bright);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: all 0.25s ease;
+  }
+
+  .stack-item:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+    transform: translateX(4px);
+  }
+
+  /* ===== EXPERIENCE TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border-bright);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--bg);
+    border: 2px solid var(--neon);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-glow);
+  }
+
+  .timeline-item.current::before {
+    background: var(--neon);
+    animation: pulse 2s infinite;
+  }
+
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--neon);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-company {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-desc {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95rem;
+    max-width: 700px;
+  }
+
+  /* ===== EDUCATION ===== */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .edu-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bright);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--neon);
+    transition: width 0.4s ease;
+  }
+
+  .edu-card:hover {
+    border-color: var(--neon);
+    transform: translateY(-4px);
+  }
+
+  .edu-card:hover::before { width: 100%; }
+
+  .edu-degree {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-school {
+    font-size: 0.9rem;
+    color: var(--neon);
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ===== DRONE SECTION ===== */
+  .drone-section {
+    background: var(--bg-elev);
+    border: 1px solid var(--border-bright);
+    padding: 3rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .drone-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--neon-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .drone-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .drone-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .drone-content p {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+  }
+
+  .drone-badge img {
+    border: 1px solid var(--border-bright);
+    transition: all 0.3s ease;
+  }
+
+  .drone-badge:hover img {
+    border-color: var(--neon);
+    box-shadow: 0 0 25px var(--neon-glow);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bright);
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover {
+    border-color: var(--neon);
+    background: rgba(57, 255, 20, 0.03);
+    transform: translateY(-2px);
+  }
+
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    word-break: break-all;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  footer .neon { color: var(--neon); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .container { padding: 0 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.75rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .drone-section { padding: 2rem 1.5rem; }
+    .timeline { padding-left: 1.5rem; }
+    .timeline-item::before { left: -1.9rem; }
+    section { padding: 3.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <span class="logo">patovega</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#drone">Drone</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      <span>AVAILABLE / CURRENTLY @ SIERRA GORDA SCM</span>
+    </div>
+    <h1>Patricio Vega.<br><span class="accent">AI &amp; Computer Vision</span><br>Engineer.</h1>
+    <p class="hero-subtitle">
+      Building intelligent systems where pixels meet purpose. Master's in Artificial Intelligence, computer vision specialist since 2020, and software engineer since 2011.
+    </p>
+    <div class="hero-meta">
+      <span><strong>15+</strong> years coding</span>
+      <span><strong>6+</strong> years in CV</span>
+      <span><strong>M.Sc.</strong> Artificial Intelligence</span>
+      <span><strong>UAV</strong> Drone Pilot</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">01 //</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Computer Vision Engineer</strong> currently working as <span class="highlight">Innovation &amp; Systems Engineer at Sierra Gorda SCM</span>, where I bring AI and computer vision into mining operations to solve real-world industrial challenges.
+        </p>
+        <p>
+          My path started with software engineering back in <strong>2011</strong>, evolved through full-stack development, technical leadership, and product ownership, and converged into <span class="highlight">artificial intelligence and computer vision</span> — the field I've called home since 2020.
+        </p>
+        <p>
+          I recently completed my <strong>Master's degree in Artificial Intelligence</strong> at Universidad Adolfo Ibáñez, building on previous postgraduate work in Data Science, Software Engineering, and Software Quality at Universidad de Chile.
+        </p>
+        <p>
+          I'm fluent in turning research into production: from prototype notebooks to deployed pipelines that have to survive harsh environments and skeptical stakeholders.
+        </p>
+      </div>
+      <div>
+        <div class="stack-grid">
+          <div class="stack-item">Computer Vision</div>
+          <div class="stack-item">Deep Learning</div>
+          <div class="stack-item">Python</div>
+          <div class="stack-item">C#</div>
+          <div class="stack-item">SQL</div>
+          <div class="stack-item">PyTorch</div>
+          <div class="stack-item">OpenCV</div>
+          <div class="stack-item">YOLO / Detection</div>
+          <div class="stack-item">MLOps</div>
+          <div class="stack-item">Big Data</div>
+          <div class="stack-item">Agile / Scrum</div>
+          <div class="stack-item">Product Ownership</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">02 //</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item current">
+        <div class="timeline-date">MAY 2023 — PRESENT</div>
+        <div class="timeline-role">Innovation &amp; Systems Engineer</div>
+        <div class="timeline-company">Sierra Gorda SCM</div>
+        <div class="timeline-desc">Driving AI and computer vision initiatives in mining operations. Designing and deploying intelligent systems that bridge research and field reality.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">NOV 2021 — MAY 2023</div>
+        <div class="timeline-role">Technical Product Owner</div>
+        <div class="timeline-company">Entel Ocean</div>
+        <div class="timeline-desc">Owning the technical roadmap for IoT and data products. Translating complex engineering work into clear product outcomes.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">AUG 2019 — NOV 2021</div>
+        <div class="timeline-role">Head of Software Development</div>
+        <div class="timeline-company">Mining TAG</div>
+        <div class="timeline-desc">Led the software team building computer vision and tracking solutions for the mining industry. Architecture, hiring, delivery.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">FEB 2017 — AUG 2019</div>
+        <div class="timeline-role">Software Engineer</div>
+        <div class="timeline-company">Mining TAG</div>
+        <div class="timeline-desc">Designed and developed new product lines while maintaining critical existing systems running in production at industrial sites.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">AUG 2014 — FEB 2017</div>
+        <div class="timeline-role">Full Stack Developer</div>
+        <div class="timeline-company">Mining TAG</div>
+        <div class="timeline-desc">Full-stack development across the entire product portfolio — from backend services to operator-facing interfaces.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2011 — 2014</div>
+        <div class="timeline-role">Software Developer</div>
+        <div class="timeline-company">Chilena Consolidada · Sermaluc · Computer Design Chile · Outside Contact Center</div>
+        <div class="timeline-desc">Early career building enterprise applications: car insurance platforms, mortgage credit systems, and large platform migrations from Visual Basic to ASP.NET.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="drone">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">03 //</span>
+      <h2>Drone Pilot</h2>
+    </div>
+    <div class="drone-section">
+      <div class="drone-content">
+        <h3>Certified UAV Operator</h3>
+        <p>
+          Beyond the codebase, I fly. As a drone pilot I combine aerial perspective with computer vision — capturing the kind of imagery that fuels detection, mapping, and inspection pipelines. Safety-verified through Airdata UAV.
+        </p>
+        <a class="drone-badge" href="https://certificates.airdata.com/OiuREX" target="_blank" rel="noopener noreferrer">
+          <img alt="Airdata UAV | Drone Safety Verified Badge" src="https://certificates.airdata.com/badge?i=OiuREX&r=26I2&t=6&m=3&size=8&c=0" style="width:266px;height:70px;border:0;image-rendering: optimizequality;image-rendering: smooth;">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">04 //</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="edu-degree">M.Sc. Artificial Intelligence</div>
+        <div class="edu-school">Universidad Adolfo Ibáñez</div>
+        <div class="edu-year">2023 — 2024</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Diploma · IT Project Management</div>
+        <div class="edu-school">Pontificia Universidad Católica de Chile</div>
+        <div class="edu-year">2022</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Postgraduate · Data Science &amp; Engineering</div>
+        <div class="edu-school">Universidad de Chile</div>
+        <div class="edu-year">2018</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Postgraduate · Software Quality</div>
+        <div class="edu-school">Universidad de Chile</div>
+        <div class="edu-year">2017</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Postgraduate · Software Engineering</div>
+        <div class="edu-school">Universidad de Chile</div>
+        <div class="edu-year">2017</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">05 //</span>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:patricio.vega1925@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">patricio.vega1925@gmail.com</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/patriciovega-34412853" target="_blank" rel="noopener noreferrer">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">/in/patriciovega-34412853</span>
+      </a>
+      <a class="contact-card" href="https://www.patovega.com" target="_blank" rel="noopener noreferrer">
+        <span class="contact-label">Website</span>
+        <span class="contact-value">patovega.com</span>
+      </a>
+      <a class="contact-card" href="https://www.datacamp.com/profile/patricio" target="_blank" rel="noopener noreferrer">
+        <span class="contact-label">DataCamp</span>
+        <span class="contact-value">/profile/patricio</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span>// Patricio Vega · </span><span class="neon">Santiago, Chile</span><span> · Built with code &amp; coffee //</span>
+  </div>
+</footer>
+
+</body>
+</html>
